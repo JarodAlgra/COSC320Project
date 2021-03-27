@@ -1,6 +1,7 @@
 import math
 
-def dijkstra_helper(w,G):
+
+def dijkstra_helper(w, G):
     for v in G.vertices:
         v.estD = math.inf
     w.estD = 0
@@ -17,15 +18,16 @@ def dijkstra_helper(w,G):
             # then there is nothing more that I can reach
             return
         # update u's neighbors
-        for v,wt in u.getOutNeighborsWithWeights():
+        for v, wt in u.getOutNeighborsWithWeights():
             if u.estD + wt < v.estD:
                 v.estD = u.estD + wt
                 v.parent = u
         unsureVertices.remove(u)
     # that's it!  Now each vertex holds estD which is its distance from w
 
-def dijkstra(w,G):
-    dijkstra_helper(w,G)
+
+def dijkstra(w, G):
+    dijkstra_helper(w, G)
     # okay, now what are all the shortest paths?
     for v in G.vertices:
         if v.estD == math.inf:
