@@ -1,13 +1,16 @@
 import math
 
-class Vertex:
-    def __init__(self, v):
+class AStarVertex:
+    def __init__(self, v, latitude, longitude):
         self.inNeighbors = [] # list of pairs (nbr, wt), where nbr is a CS161Vertex and wt is a weight
         self.outNeighbors = [] # same as above
         self.value = v
+        self.latitude = latitude
+        self.longitude = longitude
         self.status = "unvisited"
-        self.parent = None
-        self.estD = math.inf
+        self.cameFrom = None
+        self.gScore = math.inf
+        self.fScore = math.inf
 
     def hasOutNeighbor(self,v):
         if v in self.getOutNeighbors():
@@ -36,6 +39,21 @@ class Vertex:
     def getInNeighborsWithWeights(self):
         return self.inNeighbors
 
+    def getCoordinates(self):
+        return (self.latitude, self.longitude)
+    
+    def getGScore(self):
+        return self.gScore
+    
+    def getFScore(self):
+        return self.fScore
+
+    def setGScore(self, value):
+        self.gScore = value
+        
+    def setFScore(self, value):
+        self.fScore = value
+    
     def addOutNeighbor(self,v,wt):
         self.outNeighbors.append((v,wt))
 
