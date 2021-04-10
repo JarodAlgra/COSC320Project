@@ -4,7 +4,7 @@ from aStarVertex import *
 from dijkstra import *
 from aStar import *
 from aStarVertex import *
-from random import *
+from random import uniform, random, choice
 
 import time
 import csv
@@ -64,10 +64,26 @@ distDest = distGraph.vertices[VertIndex.index('YNG')]
 aStarOrg = astarGraph.vertices[VertIndex.index('ABE')]
 aStarDest = astarGraph.vertices[VertIndex.index('YNG')]
 
+# first run of dijkstra
+d1_start = time.time()
 dijkstra(costOrg, costGraph)
-dijkstra(distOrg, distGraph)
+d1_end = time.time()
+print("Running Dijkstra's On Cost ", (d1_end - d1_start) * 1000, "ms")
+print("Dijkstra on cost n vertices:", len(costGraph.vertices))
 
+# second run of dijkstra
+d2_start = time.time()
+dijkstra(distOrg, distGraph)
+d2_end = time.time()
+print("Running Dijkstra's On Distance ", (d2_end - d2_start) * 1000, "ms")
+print("Dijkstra on cost n vertices:", len(distGraph.vertices))
+
+# astar run
+astar_start = time.time()
 aStarPath = a_star(aStarOrg, aStarDest, astarGraph)
+astar_end = time.time()
+print("Running a* On Distance ", (astar_end - astar_start) * 1000, "ms")
+print("Dijkstra on cost n vertices:", len(astarGraph.vertices))
 for node in aStarPath:
     print(node)
 

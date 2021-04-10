@@ -2,6 +2,7 @@ import math
 
 
 def dijkstra_helper(w, G):
+    
     for v in G.vertices:
         v.estD = math.inf
     w.estD = 0
